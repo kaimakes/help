@@ -17,6 +17,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: url('pikachu_cursor.gif'), auto;
 }
 
 header {
@@ -26,41 +27,46 @@ header {
 
 .header-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 }
 
 h1 {
   font-size: 2.5rem;
   color: var(--primary);
+  margin: 10px 0;
 }
 
-h2 {
-  font-size: 1.5rem;
-  color: var(--secondary);
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+nav ul li {
+  margin: 10px 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 1.2rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 main {
   width: 100%;
   max-width: 800px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin: 15px 0;
-}
-
-a {
-  text-decoration: none;
-  color: var(--accent);
-}
-
-a:hover {
-  color: var(--primary);
 }
 
 footer {
@@ -70,9 +76,18 @@ footer {
   color: var(--muted);
 }
 
-.icon {
-  width: 50px;
-  margin-right: 10px;
+.icon-large {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+pre {
+  background-color: #1E2030;
+  color: var(--text);
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  overflow-x: auto;
 }
 
 @media (prefers-color-scheme: light) {
@@ -84,5 +99,8 @@ footer {
     --accent: #9ECE6A;
     --muted: #6E6C7E;
   }
-}
 
+  pre {
+    background-color: #e0e0e2;
+  }
+}
