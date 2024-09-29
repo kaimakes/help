@@ -12,94 +12,68 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'JetBrains Mono', monospace;
-      line-height: 1.6;
-      background-color: var(--bg);
-      color: var(--text);
-      cursor: url('pikachu_cursor.gif'), auto;
-      transition: background-color 0.3s, color 0.3s;
-      overflow: hidden; /* Hide overflow to prevent scrollbars */
-    }
-
-    /* Rain effect styling */
-    .rain {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .rain div {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.8);
-      width: 1px;
-      height: 100px;
-      bottom: 100%;
-      animation: rain-animation linear infinite;
-      opacity: 0.5;
-    }
-
-    @keyframes rain-animation {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100vh); }
-    }
-
-    /* Glass effect styling */
-    header {
-      text-align: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1); /* Adjusted transparency */
-      backdrop-filter: blur(10px); /* Glass effect */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      overflow: hidden; /* Prevent scrollbars */
+      background-color: rgba(255, 255, 255, 0.8);
+      position: relative;
+      height: 100vh; /* Full viewport height */
     }
 
     main {
-      padding: 20px;
-      max-width: 800px;
-      margin: 40px auto;
-      font-size: 1.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center content */
+      justify-content: center; /* Center vertically */
+      height: 100%; /* Full height for centering */
+      text-align: center;
       position: relative;
-      z-index: 1; /* Bring main content above the rain effect */
+      z-index: 10; /* Ensure text is above the rain effect */
+      color: #000; /* Default text color */
     }
 
     footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1); /* Adjusted transparency */
-      backdrop-filter: blur(10px); /* Glass effect */
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      bottom: 0;
+      position: absolute;
+      bottom: 10px;
       width: 100%;
-      z-index: 1; /* Bring footer above the rain effect */
+      text-align: center;
+      z-index: 10; /* Ensure footer is above the rain effect */
+      color: #000; /* Default footer color */
     }
 
-    /* Improved dark mode text readability */
-    [data-theme="dark"] {
-      --bg: #282a36;
-      --text: #f8f8f2;
-      --link: #8be9fd;
-      --link-hover: #ffb86c;
-      --header-bg: rgba(68, 71, 90, 0.8); /* Adjusted header for better visibility */
-      --footer-bg: rgba(68, 71, 90, 0.8); /* Adjusted footer for better visibility */
-      --border: #6272a4;
-      --pre-bg: rgba(68, 71, 90, 0.8); /* Adjusted pre background for better visibility */
-      --pre-text: #f8f8f2;
+    .rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Ignore mouse events */
+      overflow: hidden;
+      z-index: 1; /* Ensure rain is behind content */
+    }
+
+    .raindrop {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      bottom: 100%;
+      width: 2px; /* Width of the raindrop */
+      height: 10px; /* Height of the raindrop */
+      animation: fall linear infinite; /* Animation */
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh); /* Fall to bottom */
+      }
     }
   </style>
 </head>
 <body>
-  <div class="rain" id="rain-container"></div> <!-- Rain effect container -->
   <header>
     <div class="header-content">
       <img src="icon.gif" alt="Icon" class="icon-large" id="header-icon">
       <h1>Kai's Scrapbook</h1>
-      <!-- Menu Toggle for mobile -->
       <button class="menu-toggle" id="menu-toggle">☰</button>
     </div>
     <nav id="nav-menu" class="collapsed">
@@ -114,66 +88,65 @@
         <li><a href="https://github.com/kaimakes">My github</a></li>
       </ul>
     </nav>
-    <!-- Dark Mode Toggle -->
     <button id="theme-toggle">Toggle Dark Mode</button>
   </header>
 
   <main>
     <h2>Welcome to my scrapbook of notes and knowledge!</h2>
-    <p>Some random snippets, tips, commands, etcx I picked up on the road for various stuff.</p>
+    <p>Some random snippets, tips, commands, etc. I picked up on the road for various stuff.</p>
   </main>
 
   <footer>
     <p>Last Updated: September 2024</p>
   </footer>
 
-  <!-- Theme script -->
+  <div class="rain" id="rain"></div>
+
   <script src="theme.js"></script>
-  
-  <!-- Dark Mode Toggle Script -->
   <script>
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
     const theme = localStorage.getItem('theme') || 'light';
-    
+
     if (theme === 'dark') {
       body.setAttribute('data-theme', 'dark');
+      document.querySelector('main').style.color = '#fff'; // Adjust text color for dark mode
     }
-    
+
     themeToggle.addEventListener('click', function () {
       if (body.getAttribute('data-theme') === 'dark') {
         body.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
+        document.querySelector('main').style.color = '#000'; // Reset text color for light mode
       } else {
         body.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+        document.querySelector('main').style.color = '#fff'; // Adjust text color for dark mode
       }
     });
-  </script>
 
-  <!-- JavaScript to handle the collapse/expand of the header menu on mobile -->
-  <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const headerIcon = document.getElementById('header-icon');
+    const rain = document.getElementById('rain');
 
-    menuToggle.addEventListener('click', function () {
-      navMenu.classList.toggle('collapsed');
+    function createRaindrop() {
+      const raindrop = document.createElement('div');
+      raindrop.classList.add('raindrop');
+      raindrop.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+      raindrop.style.animationDuration = Math.random() * 1 + 0.5 + 's'; // Random fall duration
+      rain.appendChild(raindrop);
+
+      setTimeout(() => {
+        raindrop.remove(); // Remove raindrop after falling
+      }, 1500); // Time until raindrop is removed
+    }
+
+    setInterval(createRaindrop, 200); // Create raindrops at intervals
+
+    // Parallax effect for rain
+    document.addEventListener('mousemove', (event) => {
+      const x = event.clientX / window.innerWidth * 100;
+      rain.style.backgroundPosition = `${x}% 0`; // Move rain based on mouse position
     });
 
-    // Optionally resize the icon on mobile
-    window.addEventListener('resize', function () {
-      if (window.innerWidth <= 768) {
-        headerIcon.style.width = '50px';  // Reduce icon size on mobile
-        headerIcon.style.height = '50px';
-      } else {
-        headerIcon.style.width = '80px';  // Restore size on larger screens
-        headerIcon.style.height = '80px';
-      }
-    });
-  </script>
-
-  <script>
     const cursor = document.createElement('img');
     cursor.src = 'pikachu_cursor.gif'; // Path to your custom cursor GIF
     cursor.style.position = 'absolute';
@@ -186,20 +159,6 @@
       cursor.style.left = event.pageX + 'px';
       cursor.style.top = event.pageY + 'px';
     });
-  </script>
-
-  <script>
-    // Create rain effect
-    const rainContainer = document.getElementById('rain-container');
-    const rainDrops = 100; // Number of raindrops
-
-    for (let i = 0; i < rainDrops; i++) {
-      const drop = document.createElement('div');
-      drop.style.left = Math.random() * 100 + 'vw'; // Randomize x position
-      drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's'; // Randomize fall speed
-      drop.style.animationDelay = (Math.random() * 5) + 's'; // Randomize start delay
-      rainContainer.appendChild(drop);
-    }
   </script>
 </body>
 </html>
