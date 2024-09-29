@@ -89,5 +89,19 @@
       }
     });
   </script>
+    <script>
+    const cursor = document.createElement('img');
+    cursor.src = 'pikachu_cursor.gif'; // Path to your custom cursor GIF
+    cursor.style.position = 'absolute';
+    cursor.style.width = '32px'; // Adjust size as needed
+    cursor.style.height = '32px'; // Adjust size as needed
+    cursor.style.pointerEvents = 'none'; // Ignore pointer events
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (event) => {
+      cursor.style.left = event.pageX + 'px';
+      cursor.style.top = event.pageY + 'px';
+    });
+  </script>
 </body>
 </html>
