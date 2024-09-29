@@ -10,6 +10,70 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+      background-color: var(--bg);
+      color: var(--text);
+      cursor: none; /* Hide the default cursor */
+      transition: background-color 0.3s, color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* Ensure full height */
+      position: relative; /* For the rain effect */
+      overflow: hidden; /* Hide overflow from rain effect */
+    }
+
+    main {
+      text-align: center;
+      max-width: 800px;
+      padding: 20px;
+      margin: 20px;
+      background-color: rgba(255, 255, 255, 0.8); /* Slightly translucent for better contrast */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--footer-bg);
+      border-top: 1px solid var(--border);
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Rain effect styles */
+    .rain {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1; /* Ensure it stays behind other content */
+    }
+
+    .drop {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.8);
+      width: 2px;
+      height: 10px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -28,7 +92,7 @@
         <li><a href="travel.html">Travel</a></li>
         <li><a href="food.html">Food</a></li>
         <li><a href="mentalhealth.html">Mental Health</a></li>
-        <li><a href="https://github.com/kaimakes">My github</a></li>
+        <li><a href="https://github.com/kaimakes">My GitHub</a></li>
       </ul>
     </nav>
     <!-- Dark Mode Toggle -->
@@ -37,7 +101,7 @@
 
   <main>
     <h2>Welcome to my scrapbook of notes and knowledge!</h2>
-    <p>Some random snippets, tips, commands, etcx I picked up on the road for various stuff.</p>
+    <p>Some random snippets, tips, commands, etc., I picked up on the road for various stuff.</p>
   </main>
 
   <footer>
@@ -89,7 +153,9 @@
       }
     });
   </script>
-    <script>
+
+  <!-- Custom Cursor -->
+  <script>
     const cursor = document.createElement('img');
     cursor.src = 'pikachu_cursor.gif'; // Path to your custom cursor GIF
     cursor.style.position = 'absolute';
@@ -102,6 +168,28 @@
       cursor.style.left = event.pageX + 'px';
       cursor.style.top = event.pageY + 'px';
     });
+  </script>
+
+  <!-- Rain Effect Script -->
+  <script>
+    const rainContainer = document.createElement('div');
+    rainContainer.className = 'rain';
+    document.body.appendChild(rainContainer);
+
+    const createRainDrop = () => {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      drop.style.left = Math.random() * 100 + 'vw'; // Randomize horizontal position
+      drop.style.animationDuration = Math.random() * 0.5 + 0.5 + 's'; // Randomize speed
+      drop.style.opacity = Math.random(); // Randomize opacity
+      rainContainer.appendChild(drop);
+
+      drop.addEventListener('animationend', () => {
+        drop.remove();
+      });
+    };
+
+    setInterval(createRainDrop, 100); // Create a drop every 100ms
   </script>
 </body>
 </html>
