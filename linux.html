@@ -28,7 +28,7 @@
 
   <main>
     <h2>Linux Tips and Tricks</h2>
-    <p>Here are some useful Linux commands and snippets I've picked up:</p>
+    <p>Here are some useful Linux commands and snippets I've picked up, plus a few helpful beginner tips:</p>
     <pre>
 
 🌍 Navigating the Jungle:
@@ -36,11 +36,18 @@
     cd [directory] – move to your new home, because who doesn't love a change of scenery?
     ls – list all the treasures hidden in this folder (and maybe a few socks you lost).
     pwd – remind yourself where you are, in case you get lost!
+    mkdir [name] – build yourself a new directory, a house for your files.
+
+    # Bonus:
+    cp [source] [destination] – copy a file or directory to a new location.
+    mv [source] [destination] – move (or rename) a file or directory.
+    rm [file] – remove a file (careful, no undo button here!).
 
 ⚙️ Permissions, but make it flashy:
 
     chmod +x [file] – give your file the power of eXecution! Watch out, it's executable now!
     sudo – summon the powers of the all-seeing, all-knowing superuser. Use wisely!
+    chown [user]:[group] [file] – change the ownership of a file or directory.
 
 📦 Git-ing it together:
 
@@ -48,6 +55,7 @@
     git status – check your progress, like looking in a mirror before going out.
     git add . – add everything to your party bus of changes.
     git commit -m "message" – tell the world what you just accomplished! (Don't forget the cool message!)
+    git push – send your local changes to the cloud (or a remote repository).
 
 🧙‍♂️ NVM Sorcery:
 
@@ -64,10 +72,7 @@
 
     sudo apt update – give your system a coffee break and check for the latest updates.
     sudo apt upgrade – level up your system’s superpowers to the latest version!
-
-🔌 Power Moves:
-
-    sudo reboot – give your system a refreshing nap... it’ll wake up energized!
+    sudo apt autoremove – clean up unwanted packages and free up some space.
 
 🔍 Finding Stuff (without asking the internet, promise):
 
@@ -78,7 +83,40 @@
 📚 Quick Tips:
 
     Always use sudo with caution! It’s like having the keys to the castle—don’t leave the drawbridge down.
-    man [command] – read the manual if you're lost... or if you're just feeling extra geeky
+    man [command] – read the manual if you're lost... or if you're just feeling extra geeky.
+
+🕹 Proton for Gaming:
+
+    Proton is a compatibility layer for running Windows games on Linux through Steam. It's built on Wine and helps run many popular games natively in your Linux environment. To enable Proton:
+    
+    1. Install Steam on Linux.
+    2. Go to Steam Settings > Steam Play.
+    3. Enable Steam Play for all titles and select the latest version of Proton.
+    
+    Once set up, many Windows games will run smoothly without needing to dual-boot!
+
+    # Tip: For newer games, try using the latest version of Proton-GE, a community build with extra support for more titles.
+
+📦 Virtualization with virtIO:
+
+    virtIO is a virtualization framework for Linux that allows virtual machines (VMs) to perform at nearly native speed by providing them access to key system resources. If you're using virtualization (like KVM or QEMU) to run Linux or other OSes, virtIO drivers are important.
+    
+    Common virtIO components include:
+    - virtio-net (Networking) – allows fast network access for VMs.
+    - virtio-blk (Block Devices) – provides high-performance disk access for VMs.
+
+    To install virtIO drivers:
+    1. For Debian/Ubuntu: sudo apt install qemu-guest-agent virtio-utils.
+    2. For Red Hat/Fedora: sudo dnf install qemu-guest-agent virtio-win.
+
+    These drivers are essential for running smooth and fast VMs on a Linux host!
+
+📑 Helpful Documentation:
+
+    1. **Linux Command Line Basics**: [GNU Core Utilities](https://www.gnu.org/software/coreutils/manual/coreutils.html)
+    2. **Proton Compatibility**: [ProtonDB](https://www.protondb.com/) – Check which games work best with Proton.
+    3. **virtIO Drivers**: [virtIO Documentation](https://www.linux-kvm.org/page/Virtio)
+    4. **Package Management**: [Apt Documentation](https://manpages.debian.org/stretch/apt/apt.8.en.html)
 
     </pre>
   </main>
