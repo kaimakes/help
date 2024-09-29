@@ -1,0 +1,88 @@
+:root {
+  --bg: #24273A;
+  --text: #CAD3F5;
+  --primary: #8AADF4;
+  --secondary: #F4B8E4;
+  --accent: #A6DA95;
+  --muted: #6E738D;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: var(--secondary);
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 15px 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.icon {
+  width: 50px;
+  margin-right: 10px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #F4F4F5;
+    --text: #4C4F69;
+    --primary: #4C4F69;
+    --secondary: #DDB6F2;
+    --accent: #9ECE6A;
+    --muted: #6E6C7E;
+  }
+}
+
