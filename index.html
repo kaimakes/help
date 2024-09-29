@@ -16,66 +16,85 @@
       line-height: 1.6;
       background-color: var(--bg);
       color: var(--text);
-      cursor: none; /* Hide the default cursor */
+      cursor: url('pikachu_cursor.gif'), auto;
       transition: background-color 0.3s, color 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh; /* Ensure full height */
-      position: relative; /* For the rain effect */
-      overflow: hidden; /* Hide overflow from rain effect */
+      overflow: hidden; /* Hide overflow to prevent scrollbars */
     }
 
-    main {
-      text-align: center;
-      max-width: 800px;
-      padding: 20px;
-      margin: 20px;
-      background-color: rgba(255, 255, 255, 0.8); /* Slightly translucent for better contrast */
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: var(--footer-bg);
-      border-top: 1px solid var(--border);
-      position: relative;
-      bottom: 0;
-      width: 100%;
-    }
-
-    /* Rain effect styles */
+    /* Rain effect styling */
     .rain {
       position: absolute;
       width: 100%;
       height: 100%;
       pointer-events: none;
       overflow: hidden;
-      z-index: -1; /* Ensure it stays behind other content */
+      z-index: 0;
     }
 
-    .drop {
+    .rain div {
       position: absolute;
       background: rgba(255, 255, 255, 0.8);
-      width: 2px;
-      height: 10px;
-      animation: fall linear infinite;
+      width: 1px;
+      height: 100px;
+      bottom: 100%;
+      animation: rain-animation linear infinite;
+      opacity: 0.5;
     }
 
-    @keyframes fall {
-      0% {
-        transform: translateY(-100%);
-      }
-      100% {
-        transform: translateY(100vh);
-      }
+    @keyframes rain-animation {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+
+    /* Glass effect styling */
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1); /* Adjusted transparency */
+      backdrop-filter: blur(10px); /* Glass effect */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 40px auto;
+      font-size: 1.1em;
+      position: relative;
+      z-index: 1; /* Bring main content above the rain effect */
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1); /* Adjusted transparency */
+      backdrop-filter: blur(10px); /* Glass effect */
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      z-index: 1; /* Bring footer above the rain effect */
+    }
+
+    /* Improved dark mode text readability */
+    [data-theme="dark"] {
+      --bg: #282a36;
+      --text: #f8f8f2;
+      --link: #8be9fd;
+      --link-hover: #ffb86c;
+      --header-bg: rgba(68, 71, 90, 0.8); /* Adjusted header for better visibility */
+      --footer-bg: rgba(68, 71, 90, 0.8); /* Adjusted footer for better visibility */
+      --border: #6272a4;
+      --pre-bg: rgba(68, 71, 90, 0.8); /* Adjusted pre background for better visibility */
+      --pre-text: #f8f8f2;
     }
   </style>
 </head>
 <body>
+  <div class="rain" id="rain-container"></div> <!-- Rain effect container -->
   <header>
     <div class="header-content">
       <img src="icon.gif" alt="Icon" class="icon-large" id="header-icon">
@@ -92,7 +111,7 @@
         <li><a href="travel.html">Travel</a></li>
         <li><a href="food.html">Food</a></li>
         <li><a href="mentalhealth.html">Mental Health</a></li>
-        <li><a href="https://github.com/kaimakes">My GitHub</a></li>
+        <li><a href="https://github.com/kaimakes">My github</a></li>
       </ul>
     </nav>
     <!-- Dark Mode Toggle -->
@@ -101,7 +120,7 @@
 
   <main>
     <h2>Welcome to my scrapbook of notes and knowledge!</h2>
-    <p>Some random snippets, tips, commands, etc., I picked up on the road for various stuff.</p>
+    <p>Some random snippets, tips, commands, etcx I picked up on the road for various stuff.</p>
   </main>
 
   <footer>
@@ -154,7 +173,6 @@
     });
   </script>
 
-  <!-- Custom Cursor -->
   <script>
     const cursor = document.createElement('img');
     cursor.src = 'pikachu_cursor.gif'; // Path to your custom cursor GIF
@@ -170,26 +188,18 @@
     });
   </script>
 
-  <!-- Rain Effect Script -->
   <script>
-    const rainContainer = document.createElement('div');
-    rainContainer.className = 'rain';
-    document.body.appendChild(rainContainer);
+    // Create rain effect
+    const rainContainer = document.getElementById('rain-container');
+    const rainDrops = 100; // Number of raindrops
 
-    const createRainDrop = () => {
+    for (let i = 0; i < rainDrops; i++) {
       const drop = document.createElement('div');
-      drop.className = 'drop';
-      drop.style.left = Math.random() * 100 + 'vw'; // Randomize horizontal position
-      drop.style.animationDuration = Math.random() * 0.5 + 0.5 + 's'; // Randomize speed
-      drop.style.opacity = Math.random(); // Randomize opacity
+      drop.style.left = Math.random() * 100 + 'vw'; // Randomize x position
+      drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's'; // Randomize fall speed
+      drop.style.animationDelay = (Math.random() * 5) + 's'; // Randomize start delay
       rainContainer.appendChild(drop);
-
-      drop.addEventListener('animationend', () => {
-        drop.remove();
-      });
-    };
-
-    setInterval(createRainDrop, 100); // Create a drop every 100ms
+    }
   </script>
 </body>
 </html>
