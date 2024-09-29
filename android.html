@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your Description Here - Kai's Scrapbook">
+  <title>Your Page Title - Kai's Scrapbook</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="icon.gif">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <img src="icon.gif" alt="Icon" class="icon-large">
+      <h1>Your Page Title - Kai's Scrapbook</h1>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Back to Home</a></li>
+          <!-- Add links to other pages here -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2>Your Main Heading</h2>
+    <p>Here are some useful notes and documentation:</p>
+    <pre>
+    <!-- Add your notes and commands here -->
+    </pre>
+  </main>
+
+  <footer>
+    <p>Last Updated: September 2024</p>
+  </footer>
+
+  <script src="theme.js"></script>
+
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+      background-color: var(--bg);
+      color: var(--text);
+      cursor: none; /* Hide the default cursor */
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-large {
+      width: 80px;
+      height: 80px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 20px;
+    }
+
+    nav ul li {
+      font-size: 1.2em;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--link);
+      transition: color 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: var(--link-hover);
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 40px auto;
+      font-size: 1.1em;
+    }
+
+    pre {
+      background-color: var(--pre-bg);
+      color: var(--pre-text);
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--footer-bg);
+      border-top: 1px solid var(--border);
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Color variables for light and dark modes */
+    :root {
+      --bg: #f8f8f2;
+      --text: #282a36;
+      --link: #6272a4;
+      --link-hover: #50fa7b;
+      --header-bg: #44475a;
+      --footer-bg: #282a36;
+      --border: #6272a4;
+      --pre-bg: #282a36;
+      --pre-text: #f8f8f2;
+    }
+
+    [data-theme="dark"] {
+      --bg: #282a36;
+      --text: #f8f8f2;
+      --link: #8be9fd;
+      --link-hover: #ffb86c;
+      --header-bg: #44475a;
+      --footer-bg: #44475a;
+      --border: #6272a4;
+      --pre-bg: #44475a;
+      --pre-text: #f8f8f2;
+    }
+  </style>
+
+  <script>
+    const cursor = document.createElement('img');
+    cursor.src = 'pikachu_cursor.gif'; // Path to your custom cursor GIF
+    cursor.style.position = 'absolute';
+    cursor.style.width = '32px'; // Adjust size as needed
+    cursor.style.height = '32px'; // Adjust size as needed
+    cursor.style.pointerEvents = 'none'; // Ignore pointer events
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (event) => {
+      cursor.style.left = event.pageX + 'px';
+      cursor.style.top = event.pageY + 'px';
+    });
+  </script>
+</body>
+
+</html>
+
